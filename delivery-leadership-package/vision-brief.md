@@ -12,6 +12,7 @@
 ## Who is the customer?
 The customer is a first-time insurance shopper (new renter/homeowner or new to auto) who wants a quick, no-commitment price on their phone. They’re early in comparison shopping, not ready to create an account or talk to an agent, and will leave if too many fields are required.
 
+
 ## What pain does Evergreen Quote remove?
 Ditch the long form. Evergreen Quote gives an instant, believable estimate that updates as you type, shows real examples for confidence, and lets you save on the spot—turning a clunky stop‑and‑start into a smooth, low‑commitment flow.
 
