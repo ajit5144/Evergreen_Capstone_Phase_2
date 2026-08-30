@@ -7,7 +7,7 @@
 **Delivery week:** 2
 **Delivery Lead:** Ajit Ranjan Sahu
 **Engineering team (represented by):** https://github.com/ajit5144/Evergreen_Capstone_Phase_2.git
-**GitHub Project board:** https://github.com/users/ajit5144/projects/4/views/1?system_template=kanban
+**GitHub Project board:** https://github.com/users/ajit5144/projects/4
 
 ## Who is the customer?
 The customer is a first-time insurance shopper (new renter/homeowner or new to auto) who wants a quick, no-commitment price on their phone. They’re early in comparison shopping, not ready to create an account or talk to an agent, and will leave if too many fields are required.
