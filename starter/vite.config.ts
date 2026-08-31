@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/Evergreen_Capstone_Phase_2/",
+   base: "/Evergreen_Capstone_Phase_2/",
   server: {
     watch: {
       usePolling: true,
