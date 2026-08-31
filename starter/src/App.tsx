@@ -36,16 +36,6 @@ function App() {
             <QuoteForm />
             <RecentQuotes />
           </section>
-          <section className="quote-form-section">
-            <div className="quote-form">
-              <h2>Quote form arrives this week</h2>
-              <p>
-                The engineering team's QuoteForm and RecentQuotes components are
-                in your lab kit. As Delivery Lead, you assemble them into this
-                slot on Day 2.
-              </p>
-            </div>
-          </section>
         </main>
 
         <footer className="site-footer">

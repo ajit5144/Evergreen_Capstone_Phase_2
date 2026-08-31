@@ -12,6 +12,9 @@ on:
 
 jobs:
   build:
+    name: Greetings
+    run: echo "Hello, Evergreen Quote Capstone learners! This is your CI workflow running. ${{github.actor}} is the actor, and this is the event: ${{github.event_name}}."
+    
     name: Type-check and build
     runs-on: ubuntu-latest
     steps:
