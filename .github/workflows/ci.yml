@@ -30,7 +30,6 @@ jobs:
 
       - name: Greetings
         run: echo "Hello, Evergreen Quote Capstone by ${{ github.actor }} event ${{github.event_name}}"
-        run: echo "The workflow is running on branch ${{ github.ref_name }}"
 
       - name: Set up Node 24
         uses: actions/setup-node@v5
