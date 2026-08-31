@@ -3,12 +3,15 @@
 // on Day 2 you update the values (values only) to match the project sponsor's
 // rate decision.
 import type { CoverageType } from "./types";
+import {BASE_RATES} from "./rates";
 
-const BASE_RATES: Record<CoverageType, number> = {
-  auto: 80,
-  home: 120,
-  life: 60,
-};
+// Base rate upgrade as part of inject 2
+//const BASE_RATES: Record<CoverageType, number> = {
+  //auto: 80,
+  //home: 120,
+  //life: 60,
+  
+//};
 
 export function calculatePremium(
   type: CoverageType,
