@@ -26,9 +26,12 @@ jobs:
 
       - name: Install dependencies from the lock file
         run: npm ci
+        working-directory: ./starter
 
       - name: Type-check (the contracts must hold)
         run: npm run type-check
+        working-directory: ./starter
 
       - name: Production build
         run: npm run build
+        working-directory: ./starter
