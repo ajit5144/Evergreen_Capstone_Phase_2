@@ -10,6 +10,15 @@ on:
   pull_request:
     branches: ["master"]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "ci"
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Type-check and build
@@ -21,6 +30,7 @@ jobs:
 
       - name: Greetings
         run: echo "Hello, Evergreen Quote Capstone by ${{ github.actor }} event ${{github.event_name}}"
+        run: echo "The workflow is running on branch ${{ github.ref_name }}"
 
       - name: Set up Node 24
         uses: actions/setup-node@v5
@@ -40,3 +50,21 @@ jobs:
       - name: Production build
         run: npm run build
         working-directory: ./starter
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: evergreen-quote-build
+          path: ./starter/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
