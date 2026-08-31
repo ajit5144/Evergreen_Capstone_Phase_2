@@ -20,10 +20,10 @@ jobs:
 
       - name: Set up Node 24
         uses: actions/setup-node@v5
-        working-directory: ./starter
         with:
           node-version: "24"
           cache: "npm"
+          cache-dependency-path: ./starter/package-lock.json
 
       - name: Install dependencies from the lock file
         run: npm ci
