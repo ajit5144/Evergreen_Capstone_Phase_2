@@ -1,4 +1,4 @@
-# Decision Memo: Inject 1 : Implement new base rates
+
 
 **Date:** 01 SEP, 2026
 **Author:** Ajit Ranjan Sahu
