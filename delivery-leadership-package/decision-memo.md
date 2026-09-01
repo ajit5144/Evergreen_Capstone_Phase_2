@@ -2,35 +2,35 @@
 
 **Date:** 01 SEP, 2026
 **Author:** Ajit Ranjan Sahu
-**Decision area:** Day 2 Inject: Implement new base rate
+**Decision area:** Day 2 Inject: Add Zip code to the Quote form without changing delivery timelines. 
 
 ## Context
 
-The team received a new requirement to update the placeholder base rates used to calculate quote estimates for auto, home, and life coverage. Because these rates directly affect the numbers shown to first-time shoppers, we need to choose how to implement the change in a way that is fast, safe, and easy to adjust again if sponsor guidance changes.
+On Tuesday afternoon, the sponsor requested two changes. Marketing requires a ZIP-code field on the quote form by Thursday to support a regional pricing A/B test. Platform reported a moderate-severity alert in a pinned build-time dependency; the recommended upgrade is not available until next week and does not affect customer downloads. The delivery target remains unchanged: assemble the product, maintain type safety, ensure correct data loading, and merge with a green build.
 
 ## Options considered
 
-Option A: Update the values directly in the existing premium calculation file.
-Pros: Fastest change, minimal file movement, lowest short-term effort.
-Cons: Keeps rate values mixed into calculation logic, makes future updates harder to find, and increases the chance of changing logic accidentally when only configuration should change.
+Option A: Add the ZIP-code field this week and hold scope elsewhere.
+Pros: Responds directly to Marketing’s ask and shows flexibility.
+Cons: “Just add the box” is not actually small work. It likely means updating types, form state, validation, quote logic, hook/context behavior, QA coverage, and acceptance criteria. If we say yes this week, something else needs to come out, and the most likely cost is reduced confidence in the core delivery goal.
 
-Option B: Move base rates into a separate TypeScript config file and import them into the premium logic.
-Pros: Creates a single, clear place to update sponsor rates, keeps business configuration separate from calculation code, and reduces risk when rates change again.
-Cons: Slightly more refactoring effort now, and requires updating imports in the existing calculation file.
+Option B: Do not add the ZIP-code field this week; keep Phase 2 scope intact.
+Pros: Protects the committed delivery goal, keeps the team focused on the live estimate/data-loading/build path, and reduces the chance of destabilizing the app late in the week.
+Cons: Marketing does not get the new field in this release and the regional pricing experiment waits until a later change.
 
-Option C: Store the rates in environment variables.
-Pros: Makes rate values configurable without touching application code and could help across environments later.
-Cons: Adds unnecessary complexity for a small front-end capstone, makes related values harder to read together, and is less transparent for reviewers trying to validate the rate model.
+Option C: Add only the visible ZIP-code input this week, without wiring it into pricing.
+Pros: Gives the appearance of responding quickly.
+Cons: High risk of confusion and weak product behavior. Customers would enter a ZIP code that does nothing, which is misleading, and reviewers are likely to treat it as incomplete or broken.
 
 
 ## Recommendation
 
-Option B: Move base rates into a separate TypeScript config file and import them into the premium logic. This gives the team a clean, low-risk way to respond to the requirement change without scattering sponsor pricing decisions through the codebase. It also keeps the implementation simple enough for the current project while making later rate updates faster and safer.
+Option B: Do not add the ZIP-code field this week; keep Phase 2 scope intact.
 
 ## Why
 
-If rates need to change, we need to update them quickly and accurately so the estimate remains believable and aligned with sponsor expectations, without introducing avoidable mistakes into the customer-facing premium calculation.
+The main reason is to keep this week’s delivery on track. Adding the ZIP-code field now would take extra time across form changes, pricing logic, testing, and review, and would put the committed goal at risk. Shipping on the current toolchain is the lower-risk choice because the flagged issue is in a build-time dependency and the planned upgrade is already scheduled for next week.
 
 ## What would change my mind
 
-If the sponsor said by the end of this phase that rates must vary by environment, change frequently without code changes, or be managed outside the app, I would revisit Option C and consider moving the rate values into configuration outside the source file.
+If the schedule expands, we’ll look to include the ZIP‑code feature in a subsequent release. We’ll proceed only if the added form, pricing, and validation work won’t compromise the current target.

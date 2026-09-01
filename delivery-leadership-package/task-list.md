@@ -1,6 +1,8 @@
 # Task List (Reference Shape)
 
-> The real task list lives on your GitHub Project board. This file is the **shape**: what each issue should look like before it leaves your hands. Link to the board from `vision-brief.md`.
+Task list and its status can be found in the below project board.
+
+https://github.com/users/ajit5144/projects/4 
 
 ## Issue template
 
