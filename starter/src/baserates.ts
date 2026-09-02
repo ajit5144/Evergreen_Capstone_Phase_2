@@ -7,5 +7,6 @@ export const BASE_RATES: Record<CoverageType, number> = {
   home: 130,
  
   life: 65,
- 
+  
+  renters: 50,
 };

@@ -5,29 +5,37 @@
 // You drop it in; you don't modify it.
 import { formatCurrency } from "../premium";
 import { useQuotes } from "../context/QuotesContext";
+import { CoverageIcons } from "../addicons";
 
 function RecentQuotes() {
   const { quotes, loading, error } = useQuotes();
 
+
   return (
-    <aside className="recent-quotes">
-      <h2>Recent quotes</h2>
-      {loading && <p className="loading">Loading recent quotes…</p>}
-      {error && <p className="message">{error}</p>}
-      {!loading && !error && (
-        <ul className="recent-list">
-          {quotes.map((quote) => (
+  <aside className="recent-quotes">
+    <h2>Recent quotes</h2>
+    {loading && <p className="loading">Loading recent quotes…</p>}
+    {error && <p className="message">{error}</p>}
+    {!loading && !error && (
+      <ul className="recent-list">
+        {quotes.map((quote) => {
+          const Icon = CoverageIcons[quote.type.toLowerCase() as keyof typeof CoverageIcons];
+          return (
             <li key={quote.id}>
+              <span className="quote-icon">
+                <Icon />
+              </span>
               <span className="quote-type">{quote.type}</span> -{" "}
               <span className="quote-premium">
                 {formatCurrency(quote.monthlyPremium)}/mo
               </span>
             </li>
-          ))}
-        </ul>
-      )}
-    </aside>
-  );
+          );
+        })}
+      </ul>
+    )}
+  </aside>
+);
 }
 
 export default RecentQuotes;
