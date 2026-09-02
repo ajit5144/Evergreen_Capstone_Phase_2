@@ -1,0 +1,70 @@
+# Evergreen Quote - provided CI workflow (Phase 2).
+# Capstone learners: enable this by copying it to .github/workflows/ci.yml
+# in your repo and pushing. Do not modify the workflow itself.
+
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["master"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "ci"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Type-check and build
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out the code
+        uses: actions/checkout@v5
+
+      - name: Greetings
+        run: echo "Hello, Evergreen Quote Capstone by ${{ github.actor }} event ${{github.event_name}}"
+
+      - name: Set up Node 24
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: ./starter/package-lock.json
+
+      - name: Install dependencies from the lock file
+        run: npm ci
+        working-directory: ./starter
+
+      - name: Type-check (the contracts must hold)
+        run: npm run type-check
+        working-directory: ./starter
+
+      - name: Production build
+        run: npm run build
+        working-directory: ./starter
+
+      - name: Upload build artifacts
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./starter/dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
